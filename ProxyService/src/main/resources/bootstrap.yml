@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: ProxyService
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+          url-expression: "'http://'+serviceId"
+server:
+  port: 8080
+logging:
+  level:
+    org.springframework.cloud.gateway: TRACE
+    org.springframework.cloud.loadbalancer: TRACE
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+zuul:
+  routes:
+    doctor:
+      path: /doctor/**
+    patient:
+      path: /patient/**
+    consultation:
+      path: /consultation/**
